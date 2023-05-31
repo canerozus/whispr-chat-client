@@ -20,9 +20,9 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const navbarBackground = isMobile ? "bg-blue-600" : "bg-blue-600";
+  const navbarBackground = "bg-blue-600";
   const logoColor = isMobile ? "text-white" : "text-blue-200";
-  const searchInputBackground = isMobile ? "bg-blue-500" : "bg-blue-500";
+  const searchInputBackground = "bg-blue-500";
   const searchInputPlaceholderColor = isMobile
     ? "placeholder-blue-200"
     : "placeholder-white";
@@ -30,20 +30,20 @@ const Navbar: React.FC<NavbarProps> = ({}) => {
 
   return (
     <div
-      className={`flex items-center justify-between py-4 px-6 ${navbarBackground} h-16  w-full fixed`}
+      className={`flex items-center justify-between py-4 px-6 ${navbarBackground} h-16 w-full fixed`}
     >
       {isMobile && <div className={`text-2xl font-bold ${logoColor}`}>W</div>}
       {!isMobile && (
         <div className={`text-xl font-bold ${logoColor}`}>Whispr</div>
       )}
-      <div className="flex items-center">
+      <div className="flex-grow flex items-center justify-center">
         <input
           type="text"
           placeholder="Search..."
-          className={`text-white rounded-md px-2 py-1 mr-4 focus:outline-none ${searchInputBackground} ${searchInputPlaceholderColor}`}
+          className={`text-white rounded-md w-3/4 px-2 py-1 mr-4 focus:outline-none ${searchInputBackground} ${searchInputPlaceholderColor}`}
         />
-        <FiLogOut className={`text-xl cursor-pointer ${logoutIconColor}`} />
       </div>
+      <FiLogOut className={`text-xl  cursor-pointer ${logoutIconColor}`} />
     </div>
   );
 };
