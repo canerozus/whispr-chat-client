@@ -2,8 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { FiLogOut, FiSearch } from "react-icons/fi";
 
-
-
 const Navbar = () => {
   const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
 
