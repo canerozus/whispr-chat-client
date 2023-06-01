@@ -6,10 +6,10 @@ export default function Home() {
       <Navbar />
       <div className="page">
         <div className="friends">
-
+          test
         </div>
-        <div>
-
+        <div className="chat">
+          test msg
         </div>
       </div>
     </div>
