@@ -10,6 +10,7 @@ export default function Home() {
         </div>
         <div className="chat">
           test msg
+          
         </div>
       </div>
     </div>
