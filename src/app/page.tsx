@@ -1,3 +1,4 @@
+import Chat from "./components/Chat";
 import Navbar from "./components/Navbar";
 import SideBar from "./components/SideBar";
 
@@ -7,7 +8,7 @@ export default function Home() {
       <Navbar />
       <div className="flex flex-row">
         <SideBar/>
-         {/* <Chat/> */}
+         <Chat/>
       </div>
     </div>
   );

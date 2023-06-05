@@ -4,7 +4,7 @@ type Props = {};
 
 const SideBar = (props: Props) => {
   return (
-    <div className="flex flex-col h-screen p-6 w-1/4 bg-gray-200">
+    <div className="flex flex-col h-screen p-6 w-1/5 bg-gray-200">
       <h2 className="text-lg font-bold mb-6">Chat List</h2>
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2 p-2 bg-white rounded-md">
