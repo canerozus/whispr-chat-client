@@ -4,9 +4,9 @@ import SideBar from "./components/SideBar";
 
 export default function Home() {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-screen">
       <Navbar />
-      <div className="flex flex-row">
+      <div className="flex flex-row flex-grow">
         <SideBar/>
          <Chat/>
       </div>

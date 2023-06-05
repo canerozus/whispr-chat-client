@@ -18,7 +18,7 @@ const Chat = (props: Props) => {
   };
 
   return (
-    <div className="flex  w-4/5 bg-gray-100">
+    <div className="flex w-4/5 bg-gray-100">
       <div className=" p-6 w-full flex flex-col justify-between">
         <div className="mb-4">
           {/* Mesajları göstermek için bir bölüm */}
