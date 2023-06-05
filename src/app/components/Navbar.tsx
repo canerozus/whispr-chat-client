@@ -31,7 +31,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`flex items-center justify-between py-4 px-6 ${navbarBackground} h-16 relative w-full `}
+      className={`flex items-center justify-between py-4 px-6 ${navbarBackground} h-16  w-full `}
     >
       {isMobile && <div className={`text-2xl font-bold ${logoColor}`}>W</div>}
       {!isMobile && (
