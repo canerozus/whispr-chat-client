@@ -3,17 +3,22 @@ import React, { useState, useEffect } from "react";
 import { FiLogOut, FiSearch } from "react-icons/fi";
 
 const Navbar = () => {
-  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 768);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(typeof window !== "undefined" && window.innerWidth <= 768);
     };
 
-    window.addEventListener("resize", handleResize);
+    if (typeof window !== "undefined") {
+      setIsMobile(window.innerWidth <= 768);
+      window.addEventListener("resize", handleResize);
+    }
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", handleResize);
+      }
     };
   }, []);
   const navbarBackground = "bg-blue-600";
@@ -26,7 +31,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`flex items-center justify-between py-4 px-6 ${navbarBackground} h-16 w-full fixed`}
+      className={`flex items-center justify-between py-4 px-6 ${navbarBackground} h-16 relative w-full `}
     >
       {isMobile && <div className={`text-2xl font-bold ${logoColor}`}>W</div>}
       {!isMobile && (
@@ -39,7 +44,7 @@ const Navbar = () => {
           className={`text-white rounded-md w-3/4 px-2 py-1 mr-4 focus:outline-none ${searchInputBackground} ${searchInputPlaceholderColor}`}
         />
       </div>
-      <FiLogOut className={`text-xl  cursor-pointer ${logoutIconColor}`} />
+      <FiLogOut className={`text-xl cursor-pointer ${logoutIconColor}`} />
     </div>
   );
 };

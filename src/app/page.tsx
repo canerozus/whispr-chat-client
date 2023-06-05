@@ -1,17 +1,13 @@
 import Navbar from "./components/Navbar";
+import SideBar from "./components/SideBar";
 
 export default function Home() {
   return (
-    <div>
+    <div className="flex flex-col">
       <Navbar />
-      <div className="page">
-        <div className="friends">
-          test
-        </div>
-        <div className="chat">
-          test msg
-          
-        </div>
+      <div className="flex flex-row">
+        <SideBar />
+         {/* <Chat/> */}
       </div>
     </div>
   );
