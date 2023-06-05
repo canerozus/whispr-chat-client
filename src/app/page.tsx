@@ -6,7 +6,7 @@ export default function Home() {
     <div className="flex flex-col">
       <Navbar />
       <div className="flex flex-row">
-        <SideBar />
+        <SideBar/>
          {/* <Chat/> */}
       </div>
     </div>
