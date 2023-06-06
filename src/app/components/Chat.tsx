@@ -12,8 +12,7 @@ const Chat = (props: Props) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Mesajı gönderme işlemini burada gerçekleştirin
-    console.log('Gönderilen Mesaj:', message);
+ 
     setMessage('');
   };
 
