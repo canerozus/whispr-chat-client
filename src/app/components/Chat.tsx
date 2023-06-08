@@ -12,7 +12,6 @@ const Chat = (props: Props) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
- 
     setMessage('');
   };
 
