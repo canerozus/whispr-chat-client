@@ -1,7 +1,11 @@
 import Link from 'next/link';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserInfo } from '../store/userSlice';
 
 const Login = () => {
+  const dispatch = useDispatch();
+  
   return (
     <div className="flex items-center justify-center h-screen bg-blue-500">
       <div className="bg-white p-8 rounded-md shadow-lg">
