@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-// Örnek bir async thunk eylemi
+
 export const fetchUserInfo = createAsyncThunk(
   "auth/fetchUserInfo",
   async (userId, thunkAPI) => {
@@ -23,7 +23,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    // Kullanıcı tanımlı eylemleri buraya ekleyebilirsiniz
+    
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
     },
@@ -32,7 +32,7 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // Async thunk eylemlerine yanıt olarak state güncellemelerini burada tanımlayabilirsiniz
+   
     builder
       .addCase(fetchUserInfo.pending, (state) => {
         state.loading = true;
