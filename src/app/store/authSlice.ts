@@ -1,12 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-
 export const fetchUserInfo = createAsyncThunk(
   "auth/fetchUserInfo",
   async (userId, thunkAPI) => {
-    const response = await fetch(`https://example.com/api/users/${userId}`);
+    const response = await fetch(`http://localhost:8000/api/users/login`);
     const data = await response.json();
-
     return data;
   }
 );
@@ -23,7 +21,6 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    
     setUserInfo: (state, action) => {
       state.userInfo = action.payload;
     },
@@ -32,7 +29,6 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-   
     builder
       .addCase(fetchUserInfo.pending, (state) => {
         state.loading = true;
