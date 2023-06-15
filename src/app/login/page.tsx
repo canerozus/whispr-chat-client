@@ -28,7 +28,7 @@ const Login: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(setUserInfo(userInformation));
-    return console.log("Submit")
+  
   };
 
   return (
@@ -44,8 +44,8 @@ const Login: React.FC = () => {
               Email Address
             </label>
             <input
-              type="text"
-              id="text"
+              type="email"
+              id="email"
               name="username"
               value={userInformation.username}
               onChange={handleChange}
