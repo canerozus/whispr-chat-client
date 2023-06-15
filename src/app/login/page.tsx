@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link";
 import React, { useState, ChangeEvent } from "react";
 import { setUserInfo } from "../store/authSlice";
@@ -27,6 +28,7 @@ const Login: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(setUserInfo(userInformation));
+    return console.log("Submit")
   };
 
   return (
@@ -42,8 +44,8 @@ const Login: React.FC = () => {
               Email Address
             </label>
             <input
-              type="email"
-              id="email"
+              type="text"
+              id="text"
               name="username"
               value={userInformation.username}
               onChange={handleChange}
