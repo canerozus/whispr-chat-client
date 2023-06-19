@@ -1,8 +1,9 @@
-"use client"
+"use client";
 import Link from "next/link";
 import React, { useState, ChangeEvent } from "react";
-import { setUserInfo } from "../store/authSlice";
+import { fetchLogin } from "../store/authSlice";
 import { useAppDispatch } from "../store/store";
+import { useRouter } from "next/navigation";
 
 export interface UserInfo {
   username: string;
@@ -15,7 +16,7 @@ const Login: React.FC = () => {
     password: "",
   });
   const dispatch = useAppDispatch();
-
+  const router = useRouter();
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserInformation((prevUserInfo) => ({
@@ -26,7 +27,13 @@ const Login: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(setUserInfo(userInformation))
+    dispatch(fetchLogin(userInformation)).then((result) => {
+      if (result.payload === "logging in") {
+        router.push("/")
+      } else {
+        return <p>{result.payload}</p>
+      }
+    });
   };
 
   return (
