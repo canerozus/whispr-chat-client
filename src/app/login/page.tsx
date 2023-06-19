@@ -14,7 +14,6 @@ const Login: React.FC = () => {
     username: "",
     password: "",
   });
-
   const dispatch = useAppDispatch();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -27,8 +26,7 @@ const Login: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(setUserInfo(userInformation));
-  
+    dispatch(setUserInfo(userInformation))
   };
 
   return (

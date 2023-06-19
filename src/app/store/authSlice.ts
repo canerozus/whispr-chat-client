@@ -1,13 +1,13 @@
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchUserInfo = createAsyncThunk(
-  "auth/fetchUserInfo",
-  async (userId, thunkAPI) => {
-    const response = await fetch(`http://localhost:8000/api/users/login`);
-    const data = await response.json();
-    return data;
+export const fetchLogin = createAsyncThunk(
+  "auth/login",
+  async (credentials) => {
+    const request = await axios.post("http://localhost:8000/api/users/login")
+    const response = await request.data.data;
+    localStorage.setItem("user", JSON.stringify(response));
+    return response;
   }
 );
 
@@ -32,14 +32,14 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUserInfo.pending, (state) => {
+      .addCase(fetchLogin.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchUserInfo.fulfilled, (state, action) => {
+      .addCase(fetchLogin.fulfilled, (state, action) => {
         state.loading = false;
         state.userInfo = action.payload;
       })
-      .addCase(fetchUserInfo.rejected, (state, action) => {
+      .addCase(fetchLogin.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });
