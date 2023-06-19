@@ -30,6 +30,7 @@ const Login: React.FC = () => {
     e.preventDefault();
     dispatch(fetchLogin(userInformation));
   };
+  
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserInformation((prevUserInfo) => ({
@@ -91,7 +92,7 @@ const Login: React.FC = () => {
               Register
             </Link>
           </div>
-          {error && <p>{error}</p>}
+          {error as string && <p>{error as string}</p>}
         </form>
       </div>
     </div>

@@ -21,15 +21,16 @@ export const fetchLogin = createAsyncThunk(
       localStorage.setItem("user", JSON.stringify(response));
       return response;
     } catch (error: any) {
-      // return custom error message from backend if present
-      if (error.response && error.response.data.message) {
-        return rejectWithValue(error.response.data.message);
+      
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
       } else {
-        return rejectWithValue(error.message);
+        return rejectWithValue(error);
       }
     }
   }
 );
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
