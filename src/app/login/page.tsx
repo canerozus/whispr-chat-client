@@ -31,7 +31,7 @@ const Login: React.FC = () => {
       if (result.payload === "logging in") {
         router.push("/")
       } else {
-        return <p>{result.payload}</p>
+        return <p>{result.payload} error </p>
       }
     });
   };
