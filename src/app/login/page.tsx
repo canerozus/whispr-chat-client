@@ -1,9 +1,10 @@
 "use client";
 import Link from "next/link";
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import { fetchLogin } from "../store/authSlice";
-import { useAppDispatch } from "../store/store";
+import { RootState, useAppDispatch } from "../store/store";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
 
 export interface UserInfo {
   username: string;
@@ -17,23 +18,24 @@ const Login: React.FC = () => {
   });
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const { loading, error, userInfo } = useSelector((state: RootState) => state.auth);
+
+  useEffect(() => {
+    if (userInfo) {
+      router.push('/')
+    }
+  }, [userInfo])
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(fetchLogin(userInformation));
+  };
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserInformation((prevUserInfo) => ({
       ...prevUserInfo,
       [name]: value,
     }));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(fetchLogin(userInformation)).then((result) => {
-      if (result.payload === "logging in") {
-        router.push("/")
-      } else {
-        return <p>{result.payload} error </p>
-      }
-    });
   };
 
   return (
@@ -89,6 +91,7 @@ const Login: React.FC = () => {
               Register
             </Link>
           </div>
+          {error && <p>{error}</p>}
         </form>
       </div>
     </div>

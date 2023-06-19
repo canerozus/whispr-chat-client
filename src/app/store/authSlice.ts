@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = {
   loading: false,
-  userInfo: {},
+  userInfo: null,
   userToken: null,
   error: null as unknown,
   success: false,
@@ -21,7 +21,12 @@ export const fetchLogin = createAsyncThunk(
       localStorage.setItem("user", JSON.stringify(response));
       return response;
     } catch (error: any) {
-      return rejectWithValue(error.response.data);
+      // return custom error message from backend if present
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
     }
   }
 );
