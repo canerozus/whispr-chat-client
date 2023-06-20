@@ -12,13 +12,14 @@ const initialState = {
 
 export const fetchLogin = createAsyncThunk(
   "auth/login",
-  async (credentials: {}, { rejectWithValue }) => {
+  async (credentials: {username: string, password: string}, { rejectWithValue }) => {
     try {
       const request = await axios.post(
         "http://localhost:8000/api/users/login",
         credentials
       );
       const response = await request.data.data;
+      console.log(request)
       localStorage.setItem("user", JSON.stringify(response));
       return response;
     } catch (error: any) {
