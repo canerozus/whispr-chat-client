@@ -30,6 +30,28 @@ export const fetchLogin = createAsyncThunk(
     }
   }
 );
+export const fetchRegister = createAsyncThunk(
+  "auth/register",
+  async (credentials: {}, { rejectWithValue }) => {
+    try {
+      const request = await axios.post(
+        "http://localhost:8000/api/users/register",
+        credentials
+      );
+      const response = await request.data.data;
+      localStorage.setItem("user", JSON.stringify(response));
+      return response;
+    } catch (error: any) {
+      
+      if (error.response && error.response.data) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error);
+      }
+    }
+  }
+);
+
 
 const authSlice = createSlice({
   name: "auth",

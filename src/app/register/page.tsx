@@ -22,6 +22,11 @@ const Register: React.FC = () => {
       [name]: value,
     }));
   };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch()
+  };
   return (
     <div className="flex items-center justify-center h-screen bg-blue-500">
       <div className="bg-white p-8 rounded-md shadow-lg">
