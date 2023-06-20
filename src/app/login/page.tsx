@@ -27,7 +27,7 @@ const Login: React.FC = () => {
       router.push("/");
       setUserInformation({ username: "", password: "" });
     }
-  }, [userInfo]);
+  }, [userInfo,router]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
