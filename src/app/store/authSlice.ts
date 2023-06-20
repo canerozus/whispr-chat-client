@@ -39,7 +39,6 @@ export const fetchRegister = createAsyncThunk(
         credentials
       );
       const response = await request.data.data;
-      localStorage.setItem("user", JSON.stringify(response));
       return response;
     } catch (error: any) {
       
@@ -65,6 +64,7 @@ const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    //LOGIN
     builder
       .addCase(fetchLogin.pending, (state) => {
         state.loading = true;
@@ -77,6 +77,23 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload.message;
       });
+
+      
+      //REGISTER
+      builder
+      .addCase(fetchRegister.pending, (state) => {
+        state.loading = false;
+
+      })
+      .addCase(fetchRegister.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userInfo = action.payload;
+      })
+      .addCase(fetchLogin.rejected, (state, action: any) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      });
+      
   },
 });
 
