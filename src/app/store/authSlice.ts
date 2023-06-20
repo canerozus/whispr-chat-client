@@ -7,6 +7,7 @@ const initialState = {
   userToken: null,
   error: null as unknown,
   success: false,
+  registerInfo: null,
 };
 
 export const fetchLogin = createAsyncThunk(
@@ -87,9 +88,9 @@ const authSlice = createSlice({
       })
       .addCase(fetchRegister.fulfilled, (state, action) => {
         state.loading = false;
-        state.userInfo = action.payload;
+        state.registerInfo = action.payload;
       })
-      .addCase(fetchLogin.rejected, (state, action: any) => {
+      .addCase(fetchRegister.rejected, (state, action: any) => {
         state.loading = false;
         state.error = action.payload.message;
       });

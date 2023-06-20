@@ -33,6 +33,7 @@ const Login: React.FC = () => {
     e.preventDefault();
     dispatch(fetchLogin(userInformation));
   };
+  console.log(userInformation)
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

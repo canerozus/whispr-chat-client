@@ -1,5 +1,10 @@
+"use client";
 import Link from "next/link";
-import React, { useState, ChangeEvent } from "react";
+import { useRouter } from "next/navigation";
+import React, { useState, ChangeEvent, useEffect } from "react";
+import { RootState, useAppDispatch } from "../store/store";
+import { useSelector } from "react-redux";
+import { fetchRegister } from "../store/authSlice";
 export interface RegisterInfo {
   email: string;
   username: string;
@@ -13,7 +18,16 @@ const Register: React.FC = () => {
     password: "",
     createdAt: new Date(),
   });
-
+  const { loading, error, registerInfo } = useSelector(
+    (state: RootState) => state.auth
+  );
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+  useEffect(() => {
+    if(registerInfo){
+      router.push("/login")
+    }
+  }, [registerInfo]);
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -25,13 +39,13 @@ const Register: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // dispatch()
+    dispatch(fetchRegister(register));
   };
   return (
     <div className="flex items-center justify-center h-screen bg-blue-500">
       <div className="bg-white p-8 rounded-md shadow-lg">
         <h2 className="text-2xl font-bold mb-4">Register</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
               htmlFor="name"
