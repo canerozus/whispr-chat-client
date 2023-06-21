@@ -13,7 +13,7 @@ const initialState = {
 
 export const fetchLogin = createAsyncThunk(
   "auth/login",
-  async (credentials, { rejectWithValue }) => {
+  async (credentials:{}, { rejectWithValue }) => {
     try {
       const request = await axios.post(
         "http://localhost:8000/api/users/login",
