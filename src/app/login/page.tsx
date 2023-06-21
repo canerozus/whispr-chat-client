@@ -18,21 +18,21 @@ const Login: React.FC = () => {
   });
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const { loading, error, userInfo } = useSelector(
+  const { loading, error, userName, userPassword } = useSelector(
     (state: RootState) => state.auth
   );
 
   useEffect(() => {
-    if (userInfo) {
+    if (userName) {
       router.push("/");
       setUserInformation({ username: "", password: "" });
     }
-  }, [userInfo,router]);
+  }, [userName,router]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { username, password } = userInformation;
-    dispatch(fetchLogin(userInformation));
+    dispatch(fetchLogin({userInformation}));
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

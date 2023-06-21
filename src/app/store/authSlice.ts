@@ -3,7 +3,8 @@ import axios from "axios";
 
 const initialState = {
   loading: false,
-  userInfo: null,
+  userName: null,
+  userPassword: null,
   userToken: null,
   error: null as unknown,
   success: false,
@@ -12,7 +13,7 @@ const initialState = {
 
 export const fetchLogin = createAsyncThunk(
   "auth/login",
-  async (credentials: {username: string, password: string}, { rejectWithValue }) => {
+  async (credentials, { rejectWithValue }) => {
     try {
       const request = await axios.post(
         "http://localhost:8000/api/users/login",
@@ -58,9 +59,6 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUserInfo: (state, action) => {
-      state.userInfo = action.payload;
-    },
     setUserToken: (state, action) => {
       state.userToken = action.payload;
     },
@@ -73,7 +71,8 @@ const authSlice = createSlice({
       })
       .addCase(fetchLogin.fulfilled, (state, action) => {
         state.loading = false;
-        state.userInfo = action.payload;
+        state.userName = action.payload.username;
+        state.userPassword = action.payload.password;
       })
       .addCase(fetchLogin.rejected, (state, action: any) => {
         state.loading = false;
@@ -99,5 +98,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUserInfo, setUserToken } = authSlice.actions;
+export const {  setUserToken } = authSlice.actions;
 export default authSlice.reducer;
