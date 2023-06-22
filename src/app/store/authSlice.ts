@@ -35,7 +35,7 @@ export const fetchLogin = createAsyncThunk(
 );
 export const fetchRegister = createAsyncThunk(
   "auth/register",
-  async (credentials: {}, { rejectWithValue }) => {
+  async (credentials, { rejectWithValue }) => {
     try {
       const request = await axios.post(
         "http://localhost:8000/api/users/register",
