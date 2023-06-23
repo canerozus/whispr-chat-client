@@ -28,6 +28,7 @@ const Register: React.FC = () => {
       router.push("/login")
     }
   }, [registerInfo]);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const { name, value } = e.target;
@@ -39,8 +40,11 @@ const Register: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(register)
     dispatch(fetchRegister(register));
   };
+
+  
   return (
     <div className="flex items-center justify-center h-screen bg-blue-500">
       <div className="bg-white p-8 rounded-md shadow-lg">
@@ -56,6 +60,8 @@ const Register: React.FC = () => {
             <input
               type="text"
               id="name"
+              name="username"
+              value={register.username}
               onChange={handleChange}
               className="w-full px-4 py-2 rounded-md shadow-md focus:outline-none"
               placeholder="Enter your name"
@@ -71,6 +77,8 @@ const Register: React.FC = () => {
             <input
               type="email"
               id="email"
+              name="email"
+              value={register.email}
               onChange={handleChange}
               className="w-full px-4 py-2 rounded-md shadow-md focus:outline-none"
               placeholder="Enter your email address"
@@ -86,6 +94,8 @@ const Register: React.FC = () => {
             <input
               type="password"
               id="password"
+              name="password"
+              value={register.password}
               onChange={handleChange}
               className="w-full px-4 py-2 rounded-md shadow-md focus:outline-none"
               placeholder="Enter your password"

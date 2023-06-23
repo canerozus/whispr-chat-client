@@ -7,13 +7,13 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 
 export interface UserInfo {
-  username: string;
+  email: string;
   password: string;
 }
 
 const Login: React.FC = () => {
   const [userInformation, setUserInformation] = useState<UserInfo>({
-    username: "",
+    email: "",
     password: "",
   });
   const dispatch = useAppDispatch();
@@ -25,13 +25,13 @@ const Login: React.FC = () => {
   useEffect(() => {
     if (userName) {
       router.push("/");
-      setUserInformation({ username: "", password: "" });
+      setUserInformation({ email: "", password: "" });
     }
   }, [userName,router]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const { username, password } = userInformation;
+    const { email, password } = userInformation;
 
     dispatch(fetchLogin(userInformation));
   };
@@ -63,8 +63,8 @@ const Login: React.FC = () => {
                 <input
                   type="email"
                   id="email"
-                  name="username"
-                  value={userInformation.username}
+                  name="email"
+                  value={userInformation.email}
                   onChange={handleChange}
                   className="w-full px-4 py-2 rounded-md shadow-md focus:outline-none"
                   placeholder="Enter your email address"
