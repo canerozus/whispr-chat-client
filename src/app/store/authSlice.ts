@@ -19,8 +19,7 @@ export const fetchLogin = createAsyncThunk(
         "http://localhost:8000/api/users/login",
         credentials
       );
-      const response = await request.data.data;
-      console.log(response)
+      const response = await request.data;
       localStorage.setItem("user", JSON.stringify(response));
       return response;
     } catch (error: any) {
@@ -71,8 +70,7 @@ const authSlice = createSlice({
       })
       .addCase(fetchLogin.fulfilled, (state, action) => {
         state.loading = false;
-        state.userName = action.payload.username;
-        state.userPassword = action.payload.password;
+        state.userName = action.payload?.email;
       })
       .addCase(fetchLogin.rejected, (state, action: any) => {
         state.loading = false;
