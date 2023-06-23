@@ -18,15 +18,15 @@ const Login: React.FC = () => {
   });
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const { loading, error, userName} = useSelector(
+  const { loading, error, success} = useSelector(
     (state: RootState) => state.auth
   );
+
   useEffect(() => {
-    if (userName) {
+    if (success?.message === "logging in") {
       router.push("/");
-      // setUserInformation({ email: "", password: "" });
     }
-  }, [userName,router]);
+  }, [success,router]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -98,7 +98,9 @@ const Login: React.FC = () => {
                   Register
                 </Link>
               </div>
+
               {(error as string) && <p>{error as string}</p>}
+              {(success) && <p>{success?.message}</p>}
             </form>
           </div>
         </div>

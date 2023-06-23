@@ -112,6 +112,7 @@ const Register: React.FC = () => {
               <strong>Login</strong>
             </Link>
           </div>
+          {(error as string) && <p>{error as string}</p>}
         </form>
       </div>
     </div>

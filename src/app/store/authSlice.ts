@@ -3,17 +3,15 @@ import axios from "axios";
 
 const initialState = {
   loading: false,
-  userName: null,
-  userPassword: null,
+  success: null as any,
   userToken: null,
   error: null as unknown,
-  success: false,
   registerInfo: null,
 };
 
 export const fetchLogin = createAsyncThunk(
   "auth/login",
-  async (credentials : {}, { rejectWithValue }) => {
+  async (credentials: {}, { rejectWithValue }) => {
     try {
       const request = await axios.post(
         "http://localhost:8000/api/users/login",
@@ -23,7 +21,6 @@ export const fetchLogin = createAsyncThunk(
       localStorage.setItem("user", JSON.stringify(response));
       return response;
     } catch (error: any) {
-      
       if (error.response && error.response.data) {
         return rejectWithValue(error.response.data);
       } else {
@@ -43,7 +40,6 @@ export const fetchRegister = createAsyncThunk(
       const response = await request.data.data;
       return response;
     } catch (error: any) {
-      
       if (error.response && error.response.data) {
         return rejectWithValue(error.response.data);
       } else {
@@ -52,7 +48,6 @@ export const fetchRegister = createAsyncThunk(
     }
   }
 );
-
 
 const authSlice = createSlice({
   name: "auth",
@@ -70,19 +65,17 @@ const authSlice = createSlice({
       })
       .addCase(fetchLogin.fulfilled, (state, action) => {
         state.loading = false;
-        state.userName = action.payload?.email;
+        state.success = action.payload;
       })
       .addCase(fetchLogin.rejected, (state, action: any) => {
         state.loading = false;
         state.error = action.payload.message;
       });
 
-      
-      //REGISTER
-      builder
+    //REGISTER
+    builder
       .addCase(fetchRegister.pending, (state) => {
         state.loading = false;
-
       })
       .addCase(fetchRegister.fulfilled, (state, action) => {
         state.loading = false;
@@ -92,9 +85,8 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload.message;
       });
-      
   },
 });
 
-export const {  setUserToken } = authSlice.actions;
+export const { setUserToken } = authSlice.actions;
 export default authSlice.reducer;
