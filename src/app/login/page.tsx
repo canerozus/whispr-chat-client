@@ -32,7 +32,8 @@ const Login: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const { username, password } = userInformation;
-    dispatch(fetchLogin({userInformation}));
+
+    dispatch(fetchLogin(userInformation));
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
