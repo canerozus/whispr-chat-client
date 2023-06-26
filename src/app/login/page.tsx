@@ -18,15 +18,14 @@ const Login: React.FC = () => {
   });
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const { loading, error, success} = useSelector(
+  const { loading, error, success } = useSelector(
     (state: RootState) => state.auth
   );
-
   useEffect(() => {
     if (success?.message === "logging in") {
       router.push("/");
     }
-  }, [success,router]);
+  }, [success, router]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -41,9 +40,12 @@ const Login: React.FC = () => {
     }));
   };
 
+
+
+
   return (
     <>
-      { loading ? (
+      {loading ? (
         <p>Loading...</p>
       ) : (
         <div className="flex items-center justify-center h-screen bg-blue-500">
@@ -100,7 +102,7 @@ const Login: React.FC = () => {
               </div>
 
               {(error as string) && <p>{error as string}</p>}
-              {(success) && <p>{success?.message}</p>}
+              {success && <p>{success?.message}</p>}
             </form>
           </div>
         </div>
