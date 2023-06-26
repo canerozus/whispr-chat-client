@@ -43,7 +43,7 @@ const Login: React.FC = () => {
 
   return (
     <>
-      {loading ? (
+      { loading ? (
         <p>Loading...</p>
       ) : (
         <div className="flex items-center justify-center h-screen bg-blue-500">

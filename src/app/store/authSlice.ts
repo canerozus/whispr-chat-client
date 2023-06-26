@@ -71,6 +71,7 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload.message;
       });
+      
 
     //REGISTER
     builder
