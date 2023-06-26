@@ -29,6 +29,21 @@ export const fetchLogin = createAsyncThunk(
     }
   }
 );
+export const fetchLogout = createAsyncThunk(
+  "auth/logout",
+  async(credentials: string) => {
+    try {
+      const request = await axios.post(
+        "http://localhost:8000/api/users/logout",
+        credentials
+      );
+      const response = await request.data.data;
+      return response;
+    } catch (error: any) {
+      console.log(error?.message)
+    }
+  }
+)
 export const fetchRegister = createAsyncThunk(
   "auth/register",
   async (credentials: {}, { rejectWithValue }) => {
@@ -83,6 +98,20 @@ const authSlice = createSlice({
         state.registerInfo = action.payload;
       })
       .addCase(fetchRegister.rejected, (state, action: any) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      });
+
+      //LOGOUT
+      builder
+      .addCase(fetchLogout.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchLogout.fulfilled, (state, action) => {
+        state.loading = false;
+        state.success = action.payload;
+      })
+      .addCase(fetchLogout.rejected, (state, action: any) => {
         state.loading = false;
         state.error = action.payload.message;
       });
