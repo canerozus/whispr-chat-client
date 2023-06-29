@@ -41,6 +41,9 @@ const Navbar = () => {
     const token = JSON.parse(localStorage.getItem("user")!);
     dispatch(fetchLogout(token.token));
   };
+  const handleSearch = (e: any) => {
+    e.preventDefault();
+  }
 
   return (
     <div
@@ -53,6 +56,7 @@ const Navbar = () => {
       <div className="flex-grow flex items-center justify-center">
         <input
           type="text"
+          onSubmit={handleSearch}
           placeholder="Search..."
           className={`text-white rounded-md w-3/4 px-2 py-1 mr-4 focus:outline-none ${searchInputBackground} ${searchInputPlaceholderColor}`}
         />
